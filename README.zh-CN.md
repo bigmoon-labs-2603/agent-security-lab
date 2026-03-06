@@ -1,4 +1,4 @@
-﻿# Agent Security Lab（中文说明）
+# Agent Security Lab（中文说明）
 
 [English README](./README.md)
 
@@ -6,8 +6,8 @@
 
 ## 当前版本
 
-- 版本：`v1.0.0（最终可实用基线）`
-- 范围：完整防御工作流（流水线 + 检测器 + 策略 + 风险评分 + CLI + 报告 + CI）
+- 版本：`v1.1.0（最终可实用基线 + 本地 Web 仪表盘）`
+- 范围：完整防御工作流（流水线 + 检测器 + 策略 + 风险评分 + CLI + 报告 + CI + Web）
 
 ## 主要能力
 
@@ -17,6 +17,7 @@
 - CLI 单条/文件/批量分析模式
 - JSONL 事件日志与 Markdown 报告输出
 - 仪表盘快照导出（`artifacts/dashboard-latest.json`）
+- 本地 Web API + 仪表盘页面（`src/web/server.py`、`web/index.html`）
 - GitHub Actions 自动测试
 
 ## 快速开始
@@ -37,6 +38,14 @@ python -m src.cli.app batch examples/input-samples.txt --output-json artifacts/b
 
 完整用法见：`docs/usage.md`。
 
+## Web 仪表盘
+
+```bash
+python -m src.web.server
+```
+
+然后在浏览器打开 `web/index.html`。详见 `docs/web-dashboard.md`。
+
 ## 目录结构
 
 ```text
@@ -48,8 +57,10 @@ src/
   reporting/   # 报告生成
   storage/     # 事件持久化
   cli/         # 命令行入口
-tests/         # 单元测试
+  web/         # 本地 API 服务
+tests/         # 单元/集成测试
 docs/          # 架构与使用文档
+web/           # 本地仪表盘页面
 ```
 
 ## 安全与伦理

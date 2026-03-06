@@ -1,4 +1,4 @@
-﻿# Agent Security Lab
+# Agent Security Lab
 
 [中文说明 / Chinese README](./README.zh-CN.md)
 
@@ -6,8 +6,8 @@
 
 ## Project status
 
-- Phase: `v1.0.0 (final practical baseline)`
-- Scope: practical defensive workflow (pipeline + detectors + policy + scoring + CLI + reports + CI)
+- Phase: `v1.1.0 (final practical baseline + local web dashboard)`
+- Scope: practical defensive workflow (pipeline + detectors + policy + scoring + CLI + reports + CI + Web)
 
 ## Capabilities
 
@@ -17,6 +17,7 @@
 - CLI with single, file, and batch modes
 - JSONL event logging and markdown report generation
 - Dashboard snapshot export (`artifacts/dashboard-latest.json`)
+- Local web API + dashboard UI (`src/web/server.py`, `web/index.html`)
 - CI tests via GitHub Actions
 
 ## Quick start
@@ -37,6 +38,14 @@ python -m src.cli.app batch examples/input-samples.txt --output-json artifacts/b
 
 See full usage in `docs/usage.md`.
 
+## Web dashboard
+
+```bash
+python -m src.web.server
+```
+
+Then open `web/index.html` in browser. See `docs/web-dashboard.md`.
+
 ## Repository layout
 
 ```text
@@ -48,8 +57,10 @@ src/
   reporting/   # report generation
   storage/     # event persistence
   cli/         # command-line entrypoints
-tests/         # unit tests
+  web/         # local API server
+tests/         # unit/integration tests
 docs/          # architecture + usage docs
+web/           # local dashboard UI
 ```
 
 ## Security & ethics

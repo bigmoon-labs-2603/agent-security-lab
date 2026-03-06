@@ -76,3 +76,27 @@ agent-security-lab/
 
 MIT
 
+
+## Security scorecard (v0.3)
+
+| Metric | Target | Current |
+|---|---:|---:|
+| Risk decision latency (p95) | < 120 ms | TBD |
+| Detector false positive rate | < 8% | TBD |
+| Adversarial block rate | > 90% | TBD |
+
+## Architecture snapshot
+
+```text
+User/Input -> Detector Layer -> Risk Scoring -> Policy Engine -> Action Decision
+                   |                |               |
+               Injection       Aggregate score   allow/deny/approval
+               Exfiltration
+```
+
+## Testing
+
+```bash
+python -m pip install -r requirements-dev.txt
+python -m pytest -q
+```

@@ -77,3 +77,27 @@ agent-security-lab/
 ## 许可证
 
 MIT
+
+## 安全评分卡（v0.3）
+
+| 指标 | 目标 | 当前 |
+|---|---:|---:|
+| 风险决策延迟（p95） | < 120ms | TBD |
+| 检测误报率 | < 8% | TBD |
+| 对抗拦截率 | > 90% | TBD |
+
+## 架构快照
+
+```text
+用户输入 -> 检测层 -> 风险评分 -> 策略引擎 -> 动作决策
+              |         |          |
+          注入检测   聚合评分    allow/deny/approval
+          外泄检测
+```
+
+## 测试方法
+
+```bash
+python -m pip install -r requirements-dev.txt
+python -m pytest -q
+```

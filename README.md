@@ -1,5 +1,7 @@
 ﻿# Agent Security Lab
 
+[中文说明 / Chinese README](./README.zh-CN.md)
+
 > Frontier research + engineering project for securing tool-using AI agents.
 
 ## Vision
@@ -16,7 +18,7 @@ AI agents now touch shells, browsers, filesystems, and messaging channels. This 
 
 ## Project status
 
-- Phase: `v0.1 (research scaffold + prototype controls)`
+- Phase: `v0.2 (research scaffold + defensive detector expansion)`
 - Maturity: early-stage, defense-focused
 
 ## Repository layout
@@ -56,7 +58,7 @@ agent-security-lab/
 ### Phase 2 — Prototypes
 - [x] Baseline policy engine skeleton
 - [x] Prompt-injection detector skeleton
-- [ ] Exfiltration detector
+- [x] Exfiltration detector (baseline)
 - [ ] High-risk action approval adapter
 
 ### Phase 3 — Evaluation
@@ -73,3 +75,4 @@ agent-security-lab/
 ## License
 
 MIT
+

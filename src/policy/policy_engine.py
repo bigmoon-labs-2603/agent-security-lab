@@ -8,10 +8,11 @@ class ActionRequest:
     action: str
     target: str = ""
     requires_external_side_effect: bool = False
+    risk_level: str = "low"  # low/medium/high/critical
 
 
 class PolicyEngine:
-    """Baseline defensive policy engine (reference implementation)."""
+    """Defensive policy engine with approval adapter semantics."""
 
     def __init__(self) -> None:
         self.allow_tools = {"read", "memory_search", "memory_get", "session_status"}
@@ -22,8 +23,11 @@ class PolicyEngine:
         Returns: (decision, metadata)
         decision in {allow, deny, require_approval}
         """
-        if req.tool in self.allow_tools:
-            return "allow", {"reason": "tool in allow-list"}
+        if req.tool in self.allow_tools and req.risk_level in {"low", "medium"}:
+            return "allow", {"reason": "tool in allow-list and acceptable risk"}
+
+        if req.risk_level in {"high", "critical"}:
+            return "require_approval", {"reason": f"risk level is {req.risk_level}"}
 
         if req.tool in self.high_risk_tools:
             if req.requires_external_side_effect:
@@ -35,6 +39,11 @@ class PolicyEngine:
 
 if __name__ == "__main__":
     engine = PolicyEngine()
-    sample = ActionRequest(tool="message", action="send", requires_external_side_effect=True)
+    sample = ActionRequest(
+        tool="message",
+        action="send",
+        requires_external_side_effect=True,
+        risk_level="high",
+    )
     decision, meta = engine.evaluate(sample)
     print({"decision": decision, **meta})

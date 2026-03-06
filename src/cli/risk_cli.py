@@ -3,6 +3,7 @@ from src.detectors.prompt_injection import detect_prompt_injection
 from src.detectors.exfiltration import detect_exfiltration_risk
 from src.detectors.command_abuse import detect_command_abuse
 from src.scoring.risk_score import Signal, aggregate_risk
+from src.cli.dashboard import export_dashboard_snapshot
 
 
 def main() -> None:
@@ -21,14 +22,17 @@ def main() -> None:
         Signal("command_abuse", cmd.score, 0.9),
     ])
 
-    print({
+    result = {
         "overall": risk,
         "signals": {
             "prompt_injection": {"risk": inj.risk, "score": inj.score, "reason": inj.reason},
             "exfiltration": {"risk": exf.risk, "score": exf.score, "reason": exf.reason},
             "command_abuse": {"risk": cmd.risk, "score": cmd.score, "reason": cmd.reason},
         },
-    })
+    }
+
+    export_dashboard_snapshot(result)
+    print(result)
 
 
 if __name__ == "__main__":

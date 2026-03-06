@@ -1,4 +1,4 @@
-from src.scoring.risk_score import Signal, aggregate_risk
+﻿from src.scoring.risk_score import Signal, aggregate_risk
 
 
 def test_empty_signals():

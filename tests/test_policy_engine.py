@@ -1,4 +1,4 @@
-﻿from src.policy.policy_engine import PolicyEngine, ActionRequest
+﻿from src.policy.policy_engine import ActionRequest, PolicyEngine
 
 
 def test_allow_read_low_risk():
